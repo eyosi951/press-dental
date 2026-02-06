@@ -1,0 +1,1864 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Press Dental Clinic | Professional Dental Care</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* EXISTING CODE - NO CHANGES */
+        :root {
+            --primary: #1a73e8;
+            --primary-dark: #0d47a1;
+            --secondary: #34a853;
+            --light: #f8f9fa;
+            --dark: #202124;
+            --gray: #5f6368;
+            --light-gray: #f1f3f4;
+            --shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.6;
+            color: var(--dark);
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 600;
+            line-height: 1.3;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        section {
+            padding: 80px 0;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 50px;
+            color: var(--dark);
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            width: 80px;
+            height: 4px;
+            background-color: var(--primary);
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            border-radius: 2px;
+        }
+
+        .btn {
+            display: inline-block;
+            background-color: var(--primary);
+            color: white;
+            padding: 14px 32px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 500;
+            border: none;
+            cursor: pointer;
+            transition: var(--transition);
+            font-size: 1rem;
+        }
+
+        .btn:hover {
+            background-color: var(--primary-dark);
+            transform: translateY(-3px);
+            box-shadow: var(--shadow);
+        }
+
+        /* 1️⃣ Navigation Bar - NO CHANGES */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            background-color: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+            transition: var(--transition);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--primary);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+        }
+
+        .logo i {
+            margin-right: 10px;
+            font-size: 2rem;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+
+        .nav-links li {
+            margin-left: 35px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--dark);
+            font-weight: 500;
+            font-size: 1.05rem;
+            transition: var(--transition);
+            position: relative;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            background: var(--primary);
+            bottom: -5px;
+            left: 0;
+            transition: var(--transition);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.8rem;
+            color: var(--dark);
+            cursor: pointer;
+            transition: var(--transition);
+            z-index: 1001;
+            position: relative;
+        }
+
+        .menu-btn.active {
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        .menu-btn:hover {
+            color: var(--primary);
+        }
+
+        .mobile-menu {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background-color: rgba(26, 115, 232, 0.98);
+            backdrop-filter: blur(15px);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 999;
+            opacity: 0;
+            visibility: hidden;
+            transition: var(--transition);
+            overflow: auto;
+            padding: 20px;
+        }
+
+        .mobile-menu.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .mobile-menu ul {
+            list-style: none;
+            text-align: center;
+            width: 100%;
+            max-width: 400px;
+            padding: 20px;
+        }
+
+        .mobile-menu ul li {
+            margin: 25px 0;
+            transform: translateY(20px);
+            opacity: 0;
+            transition: transform 0.3s ease, opacity 0.3s ease;
+        }
+
+        .mobile-menu.active ul li {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        .mobile-menu.active ul li:nth-child(1) { transition-delay: 0.1s; }
+        .mobile-menu.active ul li:nth-child(2) { transition-delay: 0.2s; }
+        .mobile-menu.active ul li:nth-child(3) { transition-delay: 0.3s; }
+        .mobile-menu.active ul li:nth-child(4) { transition-delay: 0.4s; }
+        .mobile-menu.active ul li:nth-child(5) { transition-delay: 0.5s; }
+        .mobile-menu.active ul li:nth-child(6) { transition-delay: 0.6s; }
+
+        .mobile-menu ul li a {
+            color: white;
+            text-decoration: none;
+            font-size: 1.8rem;
+            font-weight: 600;
+            transition: var(--transition);
+            display: block;
+            padding: 10px;
+            border-radius: 8px;
+        }
+
+        .mobile-menu ul li a:hover {
+            color: var(--primary);
+            background-color: rgba(255, 255, 255, 0.1);
+            transform: scale(1.05);
+        }
+
+        .close-menu {
+            position: absolute;
+            top: 30px;
+            right: 30px;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 2rem;
+            cursor: pointer;
+            z-index: 1002;
+            transition: var(--transition);
+        }
+
+        .close-menu:hover {
+            transform: rotate(90deg);
+            color: #ffdddd;
+        }
+
+        /* 1️⃣ HERO SECTION - NO CHANGES */
+        .hero-section {
+            position: relative;
+            height: 100vh;
+            min-height: 700px;
+            overflow: hidden;
+            margin-top: 0;
+        }
+
+        .slider {
+            width: 100%;
+            height: 100%;
+            position: relative;
+        }
+
+        .slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center center;
+            background-repeat: no-repeat;
+            opacity: 0;
+            transition: opacity 1s ease;
+        }
+
+        .slide.active {
+            opacity: 1;
+        }
+
+        .slide:nth-child(1) {
+            background-image: url('https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80');
+            filter: blur(1px);
+        }
+
+        .slide:nth-child(2) {
+            background-image: url('https://images.unsplash.com/photo-1606811841689-23dfddce3e95?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80');
+            filter: blur(1px);
+        }
+
+        .slide:nth-child(3) {
+            background-image: url('https://images.unsplash.com/photo-1629909613654-28e377c37b09?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2068&q=80');
+            filter: blur(1px);
+        }
+
+        .hero-content {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            color: white;
+            z-index: 10;
+            width: 90%;
+            max-width: 800px;
+            opacity: 0;
+            animation: fadeUp 1s ease 0.5s forwards;
+            text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.8);
+        }
+
+        @keyframes fadeUp {
+            from {
+                opacity: 0;
+                transform: translate(-50%, -40%);
+            }
+            to {
+                opacity: 1;
+                transform: translate(-50%, -50%);
+            }
+        }
+
+        .hero-content h1 {
+            font-size: 4rem;
+            margin-bottom: 20px;
+            text-shadow: 0 4px 12px rgba(0, 0, 0, 0.9);
+            color: #ffffff;
+        }
+
+        .hero-content p {
+            font-size: 1.4rem;
+            margin-bottom: 30px;
+            text-shadow: 0 2px 8px rgba(0, 0, 0, 0.9);
+            color: #ffffff;
+        }
+
+        .slider-indicators {
+            position: absolute;
+            bottom: 60px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            z-index: 10;
+        }
+
+        .indicator {
+            width: 14px;
+            height: 14px;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.5);
+            margin: 0 10px;
+            cursor: pointer;
+            transition: var(--transition);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .indicator.active {
+            background-color: white;
+            transform: scale(1.3);
+            border-color: white;
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+        }
+
+        /* 3️⃣ About Section - NO CHANGES */
+        .about-section {
+            background-color: var(--light);
+        }
+
+        .about-content {
+            display: flex;
+            align-items: center;
+            gap: 50px;
+        }
+
+        .about-text {
+            flex: 1;
+        }
+
+        .about-text h2 {
+            font-size: 2.2rem;
+            margin-bottom: 20px;
+            color: var(--dark);
+        }
+
+        .about-text p {
+            color: var(--gray);
+            margin-bottom: 20px;
+            font-size: 1.1rem;
+        }
+
+        .about-image {
+            flex: 1;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+        }
+
+        .about-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+            transition: var(--transition);
+        }
+
+        .about-image:hover img {
+            transform: scale(1.05);
+        }
+
+        /* 4️⃣ Services Section - NO CHANGES */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+        }
+
+        .service-item {
+            position: relative;
+            height: 300px;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+        }
+
+        .service-bg {
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            transition: var(--transition);
+        }
+
+        .service-item:hover .service-bg {
+            transform: scale(1.1);
+        }
+
+        .service-content {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            padding: 25px;
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.85), transparent);
+            color: white;
+            transform: translateY(10px);
+            transition: var(--transition);
+        }
+
+        .service-item:hover .service-content {
+            transform: translateY(0);
+        }
+
+        .service-content h3 {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+        }
+
+        .service-content p {
+            font-size: 0.95rem;
+            opacity: 0.9;
+        }
+
+        /* 5️⃣ Appointment Section - NO CHANGES */
+        .appointment-section {
+            background-color: var(--primary);
+            color: white;
+            text-align: center;
+        }
+
+        .appointment-section .section-title {
+            color: white;
+        }
+
+        .appointment-section .section-title::after {
+            background-color: white;
+        }
+
+        .appointment-form {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: rgba(255, 255, 255, 0.1);
+            padding: 40px;
+            border-radius: 10px;
+            backdrop-filter: blur(10px);
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+            text-align: left;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 15px;
+            border-radius: 8px;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            background-color: rgba(255, 255, 255, 0.1);
+            color: white;
+            font-size: 1rem;
+            transition: var(--transition);
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: white;
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+
+        .form-control::placeholder {
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .appointment-btn {
+            background-color: white;
+            color: var(--primary);
+            font-weight: 600;
+            width: 100%;
+            margin-top: 10px;
+        }
+
+        .appointment-btn:hover {
+            background-color: var(--light-gray);
+        }
+
+        /* 1️⃣ TESTIMONIAL SECTION - MINIMAL FIX ONLY */
+        .testimonials-section {
+            background-color: var(--light-gray);
+            padding: 100px 0 80px 0;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* FIX: Added clear separation from title */
+        .testimonials-container {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            margin-top: 70px; /* INCREASED FROM PREVIOUS VALUE TO PREVENT OVERLAP */
+            padding-top: 20px; /* Added extra safety padding */
+        }
+
+        .testimonial-card {
+            background-color: white;
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.06);
+            transition: var(--transition);
+            opacity: 0;
+            transform: translateY(30px);
+            border: 1px solid rgba(0, 0, 0, 0.05);
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+            position: relative; /* Added for proper stacking */
+            overflow: visible; /* Ensure no content clipping */
+        }
+
+        .testimonial-card.animate {
+            animation: fadeUp 0.8s ease forwards;
+        }
+
+        .testimonial-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+        }
+
+        .testimonial-text {
+            font-style: italic;
+            margin-bottom: 25px;
+            color: var(--gray);
+            line-height: 1.8;
+            flex-grow: 1;
+            font-size: 1.05rem;
+            position: relative;
+            padding-left: 20px;
+        }
+
+        .testimonial-text::before {
+            content: '"';
+            position: absolute;
+            left: 0;
+            top: -5px;
+            font-size: 3rem;
+            color: var(--primary);
+            opacity: 0.2;
+            font-family: Georgia, serif;
+        }
+
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            margin-top: auto;
+        }
+
+        .author-avatar {
+            width: 55px;
+            height: 55px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            margin-right: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            color: white;
+            font-size: 1.2rem;
+        }
+
+        .author-info h4 {
+            font-size: 1.15rem;
+            margin-bottom: 5px;
+            color: var(--dark);
+        }
+
+        .author-info p {
+            color: var(--gray);
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+
+        /* 7️⃣ Why Choose Us Section - NO CHANGES */
+        .why-choose-section {
+            padding: 100px 0;
+        }
+
+        .stats-container {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 30px;
+            text-align: center;
+        }
+
+        .stat-item {
+            padding: 40px 25px;
+            border-radius: 12px;
+            background-color: white;
+            transition: var(--transition);
+            border: 2px solid var(--primary);
+            box-shadow: 0 5px 15px rgba(26, 115, 232, 0.08);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            height: 100%;
+        }
+
+        .stat-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(26, 115, 232, 0.12);
+            border-color: var(--primary-dark);
+        }
+
+        .stat-icon {
+            font-size: 2.8rem;
+            color: var(--primary);
+            margin-bottom: 20px;
+            transition: var(--transition);
+        }
+
+        .stat-item:hover .stat-icon {
+            transform: scale(1.1);
+        }
+
+        .stat-number {
+            font-size: 3.2rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 10px;
+            transition: var(--transition);
+        }
+
+        .stat-text {
+            color: var(--gray);
+            font-weight: 500;
+            font-size: 1.1rem;
+        }
+
+        /* 8️⃣ Contact Section - NO CHANGES */
+        .contact-section {
+            background-color: var(--light);
+            padding: 100px 0;
+        }
+
+        .contact-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: start;
+        }
+
+        .map-wrapper {
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+            border: 1px solid rgba(0, 0, 0, 0.05);
+            height: 100%;
+            min-height: 500px;
+            position: relative;
+        }
+
+        .map-wrapper::before {
+            content: 'Our Location';
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background-color: var(--primary);
+            color: white;
+            padding: 8px 20px;
+            border-radius: 20px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            z-index: 10;
+            box-shadow: 0 3px 10px rgba(26, 115, 232, 0.3);
+        }
+
+        .map-container {
+            width: 100%;
+            height: 100%;
+        }
+
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+        }
+
+        .contact-item {
+            background-color: white;
+            border-radius: 12px;
+            padding: 25px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: var(--transition);
+            border-left: 4px solid var(--primary);
+            display: flex;
+            align-items: flex-start;
+        }
+
+        .contact-item:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+        }
+
+        .contact-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 12px;
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            margin-right: 20px;
+            flex-shrink: 0;
+            transition: var(--transition);
+        }
+
+        .contact-item:hover .contact-icon {
+            transform: scale(1.05);
+        }
+
+        .contact-details h3 {
+            font-size: 1.3rem;
+            margin-bottom: 10px;
+            color: var(--dark);
+        }
+
+        .contact-details p {
+            color: var(--gray);
+            line-height: 1.8;
+            font-size: 1.05rem;
+        }
+
+        /* 2️⃣ "SEND US A MESSAGE" SECTION - MINIMAL FIXES */
+        /* Ensure the section is visible */
+        .contact-form {
+            display: block; /* Ensure it's visible */
+            opacity: 1;
+            visibility: visible;
+            height: auto;
+            min-height: 300px; /* Ensure minimum height */
+            margin-top: 40px;
+            padding-top: 30px;
+            border-top: 1px solid rgba(0, 0, 0, 0.1);
+        }
+
+        /* Two-column layout for message section */
+        .message-section-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            margin-top: 30px;
+        }
+
+        /* Left side - form adjustments */
+        .contact-form-wrapper {
+            width: 100%;
+            max-width: 500px; /* Reduced width */
+        }
+
+        /* Right side - communication panel */
+        .communication-panel {
+            background: white;
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+            border: 1px solid rgba(0, 0, 0, 0.05);
+        }
+
+        .communication-panel h3 {
+            font-size: 1.5rem;
+            margin-bottom: 25px;
+            color: var(--dark);
+            text-align: center;
+        }
+
+        .comm-item {
+            display: flex;
+            align-items: center;
+            padding: 15px;
+            margin-bottom: 15px;
+            background: var(--light);
+            border-radius: 8px;
+            transition: var(--transition);
+            text-decoration: none;
+            color: var(--dark);
+            border: 1px solid transparent;
+        }
+
+        .comm-item:hover {
+            background: white;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            border-color: var(--primary);
+            text-decoration: none;
+        }
+
+        .comm-icon {
+            width: 45px;
+            height: 45px;
+            border-radius: 10px;
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            margin-right: 15px;
+            flex-shrink: 0;
+        }
+
+        .comm-details h4 {
+            font-size: 1.1rem;
+            margin-bottom: 5px;
+            color: var(--dark);
+        }
+
+        .comm-details p {
+            color: var(--gray);
+            font-size: 0.9rem;
+            margin: 0;
+        }
+
+        /* 3️⃣ Footer - ICON ADDITIONS ONLY */
+        footer {
+            background-color: var(--dark);
+            color: white;
+            padding: 60px 0 30px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-col h3 {
+            font-size: 1.3rem;
+            margin-bottom: 20px;
+            color: white;
+        }
+
+        .footer-col ul {
+            list-style: none;
+        }
+
+        .footer-col ul li {
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+        }
+
+        .footer-col ul li a {
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+        }
+
+        .footer-col ul li a:hover {
+            color: var(--primary);
+            padding-left: 5px;
+        }
+
+        /* ADDED: Footer icons */
+        .footer-col ul li i {
+            margin-right: 10px;
+            width: 20px;
+            text-align: center;
+            color: var(--primary);
+            font-size: 0.9rem;
+        }
+
+        /* ADDED: Social media icons in first column */
+        .social-icons {
+            display: flex;
+            gap: 12px;
+            margin-top: 15px;
+        }
+
+        .social-icon {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-decoration: none;
+            transition: var(--transition);
+            font-size: 1rem;
+        }
+
+        .social-icon:hover {
+            background-color: var(--primary);
+            transform: translateY(-2px);
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 0.9rem;
+        }
+
+        /* Responsive Design - ADJUSTMENTS ONLY */
+        @media (max-width: 1024px) {
+            .services-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .testimonials-container {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 25px;
+            }
+            
+            .stats-container {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 25px;
+            }
+            
+            .footer-content {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .hero-section {
+                min-height: 600px;
+            }
+            
+            .hero-content h1 {
+                font-size: 3.2rem;
+            }
+            
+            .hero-content p {
+                font-size: 1.2rem;
+            }
+            
+            /* Message section responsive */
+            .message-section-container {
+                gap: 30px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .menu-btn {
+                display: block;
+            }
+            
+            .nav-links {
+                display: none;
+            }
+            
+            .hero-content h1 {
+                font-size: 2.8rem;
+            }
+            
+            .hero-content p {
+                font-size: 1.2rem;
+            }
+            
+            .about-content {
+                flex-direction: column;
+            }
+            
+            .services-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .testimonials-container {
+                grid-template-columns: 1fr;
+                gap: 25px;
+                margin-top: 60px; /* Adjusted for mobile */
+            }
+            
+            /* Contact Section Responsive */
+            .contact-container {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+            
+            .map-wrapper {
+                min-height: 400px;
+                order: -1;
+            }
+            
+            .hero-section {
+                min-height: 500px;
+            }
+            
+            .stat-item {
+                padding: 30px 20px;
+            }
+            
+            /* Message section responsive - stack on mobile */
+            .message-section-container {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+            
+            .contact-form-wrapper {
+                max-width: 100%;
+            }
+            
+            .footer-content {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .section-title {
+                font-size: 2rem;
+            }
+            
+            .hero-content h1 {
+                font-size: 2.2rem;
+            }
+            
+            .hero-content p {
+                font-size: 1rem;
+            }
+            
+            .stats-container {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            
+            .testimonial-card {
+                padding: 25px 20px;
+            }
+            
+            .mobile-menu ul li a {
+                font-size: 1.5rem;
+            }
+            
+            .contact-item {
+                padding: 20px;
+            }
+            
+            .contact-icon {
+                width: 50px;
+                height: 50px;
+                font-size: 1.3rem;
+            }
+            
+            .hero-section {
+                min-height: 450px;
+            }
+            
+            /* Mobile adjustments for message section */
+            .communication-panel {
+                padding: 20px;
+            }
+            
+            .comm-item {
+                padding: 12px;
+            }
+            
+            .comm-icon {
+                width: 40px;
+                height: 40px;
+                font-size: 1.1rem;
+            }
+        }
+
+        @media (max-height: 600px) and (orientation: landscape) {
+            .hero-section {
+                min-height: 600px;
+            }
+            
+            .hero-content h1 {
+                font-size: 2.5rem;
+                margin-bottom: 15px;
+            }
+            
+            .hero-content p {
+                font-size: 1rem;
+                margin-bottom: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 1️⃣ Navigation Bar - NO CHANGES -->
+    <header>
+        <div class="container">
+            <nav>
+                <a href="#" class="logo">
+                    <i class="fas fa-tooth"></i> Press Dental Clinic
+                </a>
+                
+                <ul class="nav-links">
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#services">Services</a></li>
+                    <li><a href="#appointment">Book Appointment</a></li>
+                    <li><a href="#testimonials">Testimonials</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+                
+                <button class="menu-btn">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </nav>
+        </div>
+        
+        <div class="mobile-menu">
+            <button class="close-menu">
+                <i class="fas fa-times"></i>
+            </button>
+            <ul>
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#services">Services</a></li>
+                <li><a href="#appointment">Book Appointment</a></li>
+                <li><a href="#testimonials">Testimonials</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </div>
+    </header>
+
+    <!-- 2️⃣ Hero Section -->
+    <section class="hero-section" id="home">
+        <div class="slider">
+            <div class="slide active"></div>
+            <div class="slide"></div>
+            <div class="slide"></div>
+            
+            <div class="hero-content">
+                <h1>Press Dental Clinic</h1>
+                <p>Providing exceptional dental care with cutting-edge technology and a compassionate approach for over 15 years.</p>
+                <a href="#appointment" class="btn">Book Appointment</a>
+            </div>
+            
+            <div class="slider-indicators">
+                <div class="indicator active" data-index="0"></div>
+                <div class="indicator" data-index="1"></div>
+                <div class="indicator" data-index="2"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 3️⃣ About Section -->
+    <section class="about-section" id="about">
+        <div class="container">
+            <h2 class="section-title">About Press Dental Clinic</h2>
+            <div class="about-content">
+                <div class="about-text">
+                    <h2>Expert Dental Care You Can Trust</h2>
+                    <p>At Press Dental Clinic, we believe everyone deserves a healthy, beautiful smile. Founded by Dr. Sarah Rali in 2008, our clinic has been providing exceptional dental care to our community for over 15 years.</p>
+                    <p>Our team of experienced dental professionals uses the latest technology and techniques to ensure comfortable, effective treatments. We prioritize patient education and preventive care, helping you maintain optimal oral health for life.</p>
+                    <p>We understand that visiting the dentist can be stressful for some, which is why we've created a warm, welcoming environment where your comfort is our top priority. From routine cleanings to advanced cosmetic procedures, we're here to help you achieve and maintain the smile you've always wanted.</p>
+                    <a href="#contact" class="btn">Contact Us</a>
+                </div>
+                <div class="about-image">
+                    <img src="https://images.unsplash.com/photo-1559839734-2b71ea197ec2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="Dental clinic interior">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 4️⃣ Services Section -->
+    <section class="services-section" id="services">
+        <div class="container">
+            <h2 class="section-title">Our Services</h2>
+            <div class="services-grid">
+                <!-- Service 1 -->
+                <div class="service-item">
+                    <div class="service-bg" style="background-image: url('https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80');"></div>
+                    <div class="service-content">
+                        <h3>Teeth Cleaning</h3>
+                        <p>Professional dental cleanings to remove plaque and tartar, preventing cavities and gum disease.</p>
+                    </div>
+                </div>
+                
+                <!-- Service 2 -->
+                <div class="service-item">
+                    <div class="service-bg" style="background-image: url('https://images.unsplash.com/photo-1629909613654-28e377c37b09?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80');"></div>
+                    <div class="service-content">
+                        <h3>Dental Implants</h3>
+                        <p>Permanent tooth replacement solutions that look, feel, and function like natural teeth.</p>
+                    </div>
+                </div>
+                
+                <!-- Service 3 -->
+                <div class="service-item">
+                    <div class="service-bg" style="background-image: url('https://images.unsplash.com/photo-1537368910025-700350fe46c7?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80');"></div>
+                    <div class="service-content">
+                        <h3>Teeth Whitening</h3>
+                        <p>Professional-grade whitening treatments to brighten your smile by several shades safely.</p>
+                    </div>
+                </div>
+                
+                <!-- Service 4 -->
+                <div class="service-item">
+                    <div class="service-bg" style="background-image: url('https://images.unsplash.com/photo-1606811841689-23dfddce3e95?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80');"></div>
+                    <div class="service-content">
+                        <h3>Orthodontics</h3>
+                        <p>Modern braces and clear aligners to straighten teeth and correct bite issues for all ages.</p>
+                    </div>
+                </div>
+                
+                <!-- Service 5 -->
+                <div class="service-item">
+                    <div class="service-bg" style="background-image: url('https://images.unsplash.com/photo-1609840114035-3c981d787d60?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80');"></div>
+                    <div class="service-content">
+                        <h3>Root Canal Treatment</h3>
+                        <p>Pain-free root canal therapy to save infected teeth and relieve discomfort effectively.</p>
+                    </div>
+                </div>
+                
+                <!-- Service 6 -->
+                <div class="service-item">
+                    <div class="service-bg" style="background-image: url('https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80');"></div>
+                    <div class="service-content">
+                        <h3>Cosmetic Dentistry</h3>
+                        <p>Veneers, bonding, and contouring to enhance your smile's appearance and boost confidence.</p>
+                    </div>
+                </div>
+                
+                <!-- Service 7 -->
+                <div class="service-item">
+                    <div class="service-bg" style="background-image: url('https://images.unsplash.com/photo-1629909615189-d6d0a633ab81?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80');"></div>
+                    <div class="service-content">
+                        <h3>Pediatric Dentistry</h3>
+                        <p>Gentle dental care for children, creating positive early experiences with oral health.</p>
+                    </div>
+                </div>
+                
+                <!-- Service 8 -->
+                <div class="service-item">
+                    <div class="service-bg" style="background-image: url('https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80');"></div>
+                    <div class="service-content">
+                        <h3>Dental Crowns</h3>
+                        <p>Custom-made crowns to restore damaged teeth, improving both function and appearance.</p>
+                    </div>
+                </div>
+                
+                <!-- Service 9 -->
+                <div class="service-item">
+                    <div class="service-bg" style="background-image: url('https://images.unsplash.com/photo-1609840114035-3c981d787d60?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80');"></div>
+                    <div class="service-content">
+                        <h3>Emergency Dentistry</h3>
+                        <p>Immediate care for dental emergencies including toothaches, breaks, and knocked-out teeth.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 5️⃣ Appointment Section -->
+    <section class="appointment-section" id="appointment">
+        <div class="container">
+            <h2 class="section-title">Book Appointment</h2>
+            <p class="appointment-intro">Pick a date and leave your phone — we will contact you</p>
+            
+            <div class="appointment-form">
+                <div class="form-group">
+                    <label for="appointment-date">Preferred Date</label>
+                    <input type="date" id="appointment-date" class="form-control" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="phone-number">Phone Number</label>
+                    <input type="tel" id="phone-number" class="form-control" placeholder="Enter your phone number" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="patient-name">Your Name</label>
+                    <input type="text" id="patient-name" class="form-control" placeholder="Enter your full name">
+                </div>
+                
+                <button type="submit" class="btn appointment-btn">Request Appointment</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- 7️⃣ Why Choose Us Section -->
+    <section class="why-choose-section">
+        <div class="container">
+            <h2 class="section-title">Why Choose Us</h2>
+            <div class="stats-container">
+                <div class="stat-item">
+                    <div class="stat-icon">
+                        <i class="fas fa-user-md"></i>
+                    </div>
+                    <div class="stat-number" data-target="15">0</div>
+                    <div class="stat-text">Years of Experience</div>
+                </div>
+                
+                <div class="stat-item">
+                    <div class="stat-icon">
+                        <i class="fas fa-smile"></i>
+                    </div>
+                    <div class="stat-number" data-target="5000">0</div>
+                    <div class="stat-text">Happy Patients</div>
+                </div>
+                
+                <div class="stat-item">
+                    <div class="stat-icon">
+                        <i class="fas fa-teeth"></i>
+                    </div>
+                    <div class="stat-number" data-target="25000">0</div>
+                    <div class="stat-text">Successful Treatments</div>
+                </div>
+                
+                <div class="stat-item">
+                    <div class="stat-icon">
+                        <i class="fas fa-award"></i>
+                    </div>
+                    <div class="stat-number" data-target="12">0</div>
+                    <div class="stat-text">Professional Awards</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 1️⃣ Testimonials Section - MINIMAL FIX -->
+    <section class="testimonials-section" id="testimonials">
+        <div class="container">
+            <h2 class="section-title">Patient Testimonials</h2>
+            <div class="testimonials-container">
+                <div class="testimonial-card">
+                    <div class="testimonial-text">
+                        "The team at Press Dental Clinic is exceptional. Dr. Rali took the time to explain everything and made me feel completely at ease. My dental implants look and feel amazing!"
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">MK</div>
+                        <div class="author-info">
+                            <h4>Michael K.</h4>
+                            <p>Patient for 5 years</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="testimonial-card">
+                    <div class="testimonial-text">
+                        "I used to dread dental visits, but not anymore. The staff is so friendly and the office is beautiful. My teeth cleaning was painless and thorough. Highly recommend!"
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">SJ</div>
+                        <div class="author-info">
+                            <h4>Sarah Johnson</h4>
+                            <p>New Patient</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="testimonial-card">
+                    <div class="testimonial-text">
+                        "The teeth whitening treatment transformed my smile. I've never felt more confident. The entire process was professional, and the results exceeded my expectations."
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">RD</div>
+                        <div class="author-info">
+                            <h4>Robert Davis</h4>
+                            <p>Patient for 3 years</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 8️⃣ Contact Section -->
+    <section class="contact-section" id="contact">
+        <div class="container">
+            <h2 class="section-title">Contact Us</h2>
+            <div class="contact-container">
+                <!-- Map on LEFT -->
+                <div class="map-wrapper">
+                    <div class="map-container">
+                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3024.1778588044276!2d-73.98784468459418!3d40.70555197933213!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c25a315cdf4c9b%3A0x8b934de5cae6f7a!2sNew%20York%2C%20NY%2C%20USA!5e0!3m2!1sen!2s!4v1629991320125!5m2!1sen!2s" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+                    </div>
+                </div>
+                
+                <!-- Contact Info on RIGHT -->
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-map-marker-alt"></i>
+                        </div>
+                        <div class="contact-details">
+                            <h3>Our Location</h3>
+                            <p>123 Dental Avenue, Medical District<br>New York, NY 10001</p>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-phone-alt"></i>
+                        </div>
+                        <div class="contact-details">
+                            <h3>Phone Number</h3>
+                            <p>(555) 123-4567</p>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <div class="contact-details">
+                            <h3>Email Address</h3>
+                            <p>info@pressdentalclinic.com</p>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-clock"></i>
+                        </div>
+                        <div class="contact-details">
+                            <h3>Working Hours</h3>
+                            <p>Mon-Fri: 8:00 AM - 7:00 PM<br>Saturday: 9:00 AM - 4:00 PM<br>Sunday: Emergency Only</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 2️⃣ "SEND US A MESSAGE" SECTION - ADDED BELOW MAP -->
+            <div class="contact-form" id="message-section">
+                <div class="message-section-container">
+                    <!-- Left side - Form -->
+                    <div class="contact-form-wrapper">
+                        <h3>Send Us a Message</h3>
+                        <form id="messageForm">
+                            <div class="form-group">
+                                <input type="text" class="form-control" placeholder="Your Name" required style="color: var(--dark); background: white; border: 1px solid rgba(0,0,0,0.1);">
+                            </div>
+                            <div class="form-group">
+                                <input type="email" class="form-control" placeholder="Your Email" required style="color: var(--dark); background: white; border: 1px solid rgba(0,0,0,0.1);">
+                            </div>
+                            <div class="form-group">
+                                <input type="tel" class="form-control" placeholder="Your Phone Number" style="color: var(--dark); background: white; border: 1px solid rgba(0,0,0,0.1);">
+                            </div>
+                            <div class="form-group">
+                                <textarea class="form-control" rows="5" placeholder="Your Message" required style="color: var(--dark); background: white; border: 1px solid rgba(0,0,0,0.1);"></textarea>
+                            </div>
+                            <button type="submit" class="btn">Send Message</button>
+                        </form>
+                    </div>
+                    
+                    <!-- Right side - Communication Panel -->
+                    <div class="communication-panel">
+                        <h3>Connect With Us</h3>
+                        <!-- Telegram -->
+                        <a href="https://t.me/PressDentalClinic" class="comm-item" target="_blank">
+                            <div class="comm-icon">
+                                <i class="fab fa-telegram"></i>
+                            </div>
+                            <div class="comm-details">
+                                <h4>Telegram</h4>
+                                <p>Message us on Telegram</p>
+                            </div>
+                        </a>
+                        
+                        <!-- WhatsApp -->
+                        <a href="https://wa.me/15551234567" class="comm-item" target="_blank">
+                            <div class="comm-icon">
+                                <i class="fab fa-whatsapp"></i>
+                            </div>
+                            <div class="comm-details">
+                                <h4>WhatsApp</h4>
+                                <p>Chat with us on WhatsApp</p>
+                            </div>
+                        </a>
+                        
+                        <!-- Facebook -->
+                        <a href="https://facebook.com/PressDentalClinic" class="comm-item" target="_blank">
+                            <div class="comm-icon">
+                                <i class="fab fa-facebook"></i>
+                            </div>
+                            <div class="comm-details">
+                                <h4>Facebook</h4>
+                                <p>Visit our Facebook page</p>
+                            </div>
+                        </a>
+                        
+                        <!-- Phone -->
+                        <a href="tel:+15551234567" class="comm-item">
+                            <div class="comm-icon">
+                                <i class="fas fa-phone"></i>
+                            </div>
+                            <div class="comm-details">
+                                <h4>Call Us</h4>
+                                <p>(555) 123-4567</p>
+                            </div>
+                        </a>
+                        
+                        <!-- Email -->
+                        <a href="mailto:info@pressdentalclinic.com" class="comm-item">
+                            <div class="comm-icon">
+                                <i class="fas fa-envelope"></i>
+                            </div>
+                            <div class="comm-details">
+                                <h4>Email Address</h4>
+                                <p>info@pressdentalclinic.com</p>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 3️⃣ Footer - WITH ICONS -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-col">
+                    <h3>Press Dental Clinic</h3>
+                    <p>Providing exceptional dental care with compassion and cutting-edge technology for over 15 years.</p>
+                    <div class="social-icons">
+                        <a href="https://facebook.com/PressDentalClinic" class="social-icon" target="_blank">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="https://twitter.com/PressDental" class="social-icon" target="_blank">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="https://instagram.com/PressDentalClinic" class="social-icon" target="_blank">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="https://linkedin.com/company/PressDentalClinic" class="social-icon" target="_blank">
+                            <i class="fab fa-linkedin-in"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="footer-col">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="#home"><i class="fas fa-home"></i> Home</a></li>
+                        <li><a href="#about"><i class="fas fa-info-circle"></i> About Us</a></li>
+                        <li><a href="#services"><i class="fas fa-teeth"></i> Services</a></li>
+                        <li><a href="#appointment"><i class="fas fa-calendar-alt"></i> Book Appointment</a></li>
+                        <li><a href="#testimonials"><i class="fas fa-comment"></i> Testimonials</a></li>
+                        <li><a href="#contact"><i class="fas fa-address-book"></i> Contact</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h3>Our Services</h3>
+                    <ul>
+                        <li><a href="#services"><i class="fas fa-toothbrush"></i> Teeth Cleaning</a></li>
+                        <li><a href="#services"><i class="fas fa-tooth"></i> Dental Implants</a></li>
+                        <li><a href="#services"><i class="fas fa-star"></i> Teeth Whitening</a></li>
+                        <li><a href="#services"><i class="fas fa-teeth-open"></i> Emergency Care</a></li>
+                        <li><a href="#services"><i class="fas fa-smile"></i> Cosmetic Dentistry</a></li>
+                        <li><a href="#services"><i class="fas fa-child"></i> Pediatric Care</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h3>Contact Info</h3>
+                    <ul>
+                        <li><i class="fas fa-map-marker-alt"></i> 123 Dental Avenue, NY 10001</li>
+                        <li><i class="fas fa-phone-alt"></i> (555) 123-4567</li>
+                        <li><i class="fas fa-envelope"></i> info@pressdentalclinic.com</li>
+                        <li><i class="fas fa-clock"></i> Mon-Fri: 8AM-7PM</li>
+                        <li><i class="fas fa-clock"></i> Sat: 9AM-4PM</li>
+                        <li><i class="fas fa-ambulance"></i> Sun: Emergency Only</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>&copy; 2023 Press Dental Clinic. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // EXISTING JAVASCRIPT - NO CHANGES
+        // 1️⃣ Navigation Menu
+        const menuBtn = document.querySelector('.menu-btn');
+        const closeMenu = document.querySelector('.close-menu');
+        const mobileMenu = document.querySelector('.mobile-menu');
+        const mobileMenuLinks = document.querySelectorAll('.mobile-menu a');
+        const navLinks = document.querySelectorAll('.nav-links a');
+        
+        menuBtn.addEventListener('click', () => {
+            mobileMenu.classList.add('active');
+            menuBtn.classList.add('active');
+            document.body.style.overflow = 'hidden';
+            
+            const menuItems = document.querySelectorAll('.mobile-menu ul li');
+            menuItems.forEach((item, index) => {
+                item.style.transitionDelay = `${0.1 * (index + 1)}s`;
+            });
+        });
+        
+        closeMenu.addEventListener('click', () => {
+            mobileMenu.classList.remove('active');
+            menuBtn.classList.remove('active');
+            document.body.style.overflow = 'auto';
+            
+            const menuItems = document.querySelectorAll('.mobile-menu ul li');
+            menuItems.forEach((item) => {
+                item.style.transitionDelay = '0s';
+            });
+        });
+        
+        mobileMenuLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.remove('active');
+                menuBtn.classList.remove('active');
+                document.body.style.overflow = 'auto';
+                
+                const menuItems = document.querySelectorAll('.mobile-menu ul li');
+                menuItems.forEach((item) => {
+                    item.style.transitionDelay = '0s';
+                });
+            });
+        });
+        
+        [...navLinks, ...mobileMenuLinks].forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                const targetId = link.getAttribute('href');
+                const targetSection = document.querySelector(targetId);
+                
+                window.scrollTo({
+                    top: targetSection.offsetTop - 80,
+                    behavior: 'smooth'
+                });
+            });
+        });
+        
+        // 2️⃣ Hero Slider
+        const slides = document.querySelectorAll('.slide');
+        const indicators = document.querySelectorAll('.indicator');
+        let currentSlide = 0;
+        const slideInterval = 5000;
+        
+        function showSlide(index) {
+            slides.forEach(slide => slide.classList.remove('active'));
+            indicators.forEach(indicator => indicator.classList.remove('active'));
+            
+            slides[index].classList.add('active');
+            indicators[index].classList.add('active');
+            currentSlide = index;
+        }
+        
+        function nextSlide() {
+            let nextIndex = (currentSlide + 1) % slides.length;
+            showSlide(nextIndex);
+        }
+        
+        showSlide(0);
+        
+        let slideTimer = setInterval(nextSlide, slideInterval);
+        
+        const slider = document.querySelector('.slider');
+        slider.addEventListener('mouseenter', () => clearInterval(slideTimer));
+        slider.addEventListener('mouseleave', () => {
+            slideTimer = setInterval(nextSlide, slideInterval);
+        });
+        
+        indicators.forEach((indicator, index) => {
+            indicator.addEventListener('click', () => {
+                clearInterval(slideTimer);
+                showSlide(index);
+                slideTimer = setInterval(nextSlide, slideInterval);
+            });
+        });
+        
+        // 5️⃣ Appointment Form
+        const appointmentForm = document.querySelector('.appointment-form');
+        appointmentForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            
+            const date = document.getElementById('appointment-date').value;
+            const phone = document.getElementById('phone-number').value;
+            const name = document.getElementById('patient-name').value;
+            
+            if (date && phone) {
+                alert(`Thank you ${name || 'for your request'}! We've received your appointment request for ${date}. We'll contact you at ${phone} within 24 hours to confirm.`);
+                appointmentForm.reset();
+            } else {
+                alert('Please fill in at least the date and phone number fields.');
+            }
+        });
+        
+        // 6️⃣ Testimonials Animation
+        const testimonialCards = document.querySelectorAll('.testimonial-card');
+        
+        function checkTestimonialsVisibility() {
+            testimonialCards.forEach((card, index) => {
+                const cardPosition = card.getBoundingClientRect().top;
+                const screenPosition = window.innerHeight / 1.3;
+                
+                if (cardPosition < screenPosition) {
+                    card.style.animationDelay = `${index * 0.2}s`;
+                    card.classList.add('animate');
+                }
+            });
+        }
+        
+        checkTestimonialsVisibility();
+        
+        window.addEventListener('scroll', checkTestimonialsVisibility);
+        
+        // 7️⃣ Why Choose Us - Number Counting Animation
+        const statNumbers = document.querySelectorAll('.stat-number');
+        const statsSection = document.querySelector('.why-choose-section');
+        let statsAnimated = false;
+        
+        function animateStats() {
+            if (statsAnimated) return;
+            
+            const sectionPosition = statsSection.getBoundingClientRect().top;
+            const screenPosition = window.innerHeight / 1.3;
+            
+            if (sectionPosition < screenPosition) {
+                statNumbers.forEach((stat, index) => {
+                    const target = parseInt(stat.getAttribute('data-target'));
+                    const duration = 2000;
+                    const increment = target / (duration / 16);
+                    let current = 0;
+                    
+                    setTimeout(() => {
+                        const timer = setInterval(() => {
+                            current += increment;
+                            if (current >= target) {
+                                current = target;
+                                clearInterval(timer);
+                            }
+                            stat.textContent = Math.floor(current);
+                        }, 16);
+                    }, index * 200);
+                });
+                
+                statsAnimated = true;
+            }
+        }
+        
+        animateStats();
+        
+        window.addEventListener('scroll', animateStats);
+        
+        // NEW: Message Form Submission
+        const messageForm = document.getElementById('messageForm');
+        if (messageForm) {
+            messageForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                
+                const name = messageForm.querySelector('input[type="text"]').value;
+                const email = messageForm.querySelector('input[type="email"]').value;
+                const message = messageForm.querySelector('textarea').value;
+                
+                if (name && email && message) {
+                    alert(`Thank you ${name}! Your message has been sent successfully. We'll respond to ${email} within 24 hours.`);
+                    messageForm.reset();
+                } else {
+                    alert('Please fill in all required fields.');
+                }
+            });
+        }
+        
+        // Sticky header on scroll
+        window.addEventListener('scroll', () => {
+            const header = document.querySelector('header');
+            if (window.scrollY > 100) {
+                header.style.boxShadow = '0 5px 20px rgba(0, 0, 0, 0.1)';
+                header.style.padding = '0';
+            } else {
+                header.style.boxShadow = '0 2px 10px rgba(0, 0, 0, 0.1)';
+                header.style.padding = '';
+            }
+        });
+        
+        // Close mobile menu when clicking outside
+        document.addEventListener('click', (e) => {
+            if (mobileMenu.classList.contains('active') && 
+                !mobileMenu.contains(e.target) && 
+                !menuBtn.contains(e.target)) {
+                mobileMenu.classList.remove('active');
+                menuBtn.classList.remove('active');
+                document.body.style.overflow = 'auto';
+                
+                const menuItems = document.querySelectorAll('.mobile-menu ul li');
+                menuItems.forEach((item) => {
+                    item.style.transitionDelay = '0s';
+                });
+            }
+        });
+    </script>
+</body>
+</html>
